@@ -37,7 +37,9 @@ void checkInput(int input)
     boolean savedInput = checkAndSaveInput(input);
     if (savedInput)
     {
-        Serial.println(">> Will save input. Press 'Enter' to apply");
+        char* modeString = getModeString(getActiveCommand());
+        Serial.print(">> Will save input. Press 'Enter' to apply");
+        Serial.println(modeString);
     }
     else if (input != KEY_ENTER)
     {

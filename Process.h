@@ -19,8 +19,11 @@ extern "C" {
 #endif
 	int getSavedByte();
 	int getActiveCommand();
+	char* getModeString(int modeInt);
+
 	void setupProcess();
-	char * applyCommand();
+	char* applyCommand();
+
 	boolean doAction(int lastActive);
 	boolean checkAndSaveInput(int newByte);
 #ifdef __cplusplus

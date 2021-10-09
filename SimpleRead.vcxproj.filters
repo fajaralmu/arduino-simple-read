@@ -20,4 +20,29 @@
       <Filter>Misc Files</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="HardwareResources.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputParses.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Process.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="HardwareResources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputParses.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Process.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="__vm\.SimpleRead.vsarduino.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

@@ -4,9 +4,6 @@
 
 #include "Process.h"
 
-int SAVED_COMMANDS[3] = { 0 };
-unsigned long tick;
-boolean blinkTurnOn = 1;
 
 #define KEY_1       49
 #define KEY_0       48
@@ -17,8 +14,27 @@ boolean blinkTurnOn = 1;
 #define MODE_BLNK   3
 
 unsigned int ACTIVE;
-int savedByte; // for incoming serial data
+unsigned long tick;
 
+int savedByte; // for incoming serial data
+int SAVED_COMMANDS[3] = { 0 };
+boolean blinkTurnOn = 1;
+
+char* getModeString(int modeInt)
+{
+    switch (modeInt)
+    {
+        case MODE_BLNK:
+            return "MODE BLINK";
+        case MODE_HI:
+            return "MODE HIGH";
+        case MODE_LOW:
+            return "MODE_LOW";
+        default:
+            break;
+    }
+    return "INVALID MODE";
+}
 int getSavedByte() { return savedByte; }
 
 void setupProcess() {
@@ -58,15 +74,20 @@ void doBlink() {
 
 boolean doAction(int lastActive) {
     boolean activeChanged = lastActive != ACTIVE;
-    
-    lastActive = ACTIVE;
-    if (ACTIVE == MODE_HI)
-        if (activeChanged) digitalWrite(getLedPin(), HIGH);
-    if (ACTIVE == MODE_LOW)
-        if (activeChanged) digitalWrite(getLedPin(), LOW);
-    if (ACTIVE == MODE_BLNK)
-        doBlink();
-
+    switch (ACTIVE)
+    {
+        case MODE_HI:
+            if (activeChanged) digitalWrite(getLedPin(), HIGH);
+            break;
+        case MODE_LOW:
+            if (activeChanged) digitalWrite(getLedPin(), LOW);
+            break;
+        case MODE_BLNK:
+            doBlink();
+            break;
+        default:
+            break;
+    }
     return ACTIVE;
 }
 
@@ -79,21 +100,15 @@ char * applyCommand() {
     unsigned char* modeInString;
     
     if (savedByte == KEY_1) {
-        modeInString = "MODE HI";
         ACTIVE = MODE_HI;
     }
     else if (savedByte == KEY_0) {
-        modeInString = "MODE LOW";
         ACTIVE = MODE_LOW;
     }
     else if (savedByte == KEY_2) {
-        modeInString = "MODE BLINK";
         ACTIVE = MODE_BLNK;
     }
-    else {
-        return "INVALID MODE";
-    }
-    return modeInString;
+    return getModeString(ACTIVE);
 }
 
 

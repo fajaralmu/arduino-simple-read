@@ -18,6 +18,7 @@ extern "C" {
 #endif
 
 	boolean match(int value, int * comparators, int size);
+	char* concatenate(char* str1, char* str2);
 
 #ifdef __cplusplus
 }

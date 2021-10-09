@@ -14,3 +14,12 @@ boolean match(int value, int* comparators, int size)
 	return 0;
 }
 
+char* concatenate(char* str1, char* str2)
+{
+	unsigned int c = strlen(str1) + strlen(str2) + 1;
+	char* result = (char*)malloc(c);
+	strcpy(result, str1);
+	strcat(result, str2);
+	return result;
+}
+

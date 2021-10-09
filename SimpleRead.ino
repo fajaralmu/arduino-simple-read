@@ -22,10 +22,9 @@ int readInput() {
         // read the incoming byte:
         int newByte = Serial.read();
         char c = newByte;
-        Serial.println("");
-        const char * str = "Input Received:";
-        Serial.print(str);
-        Serial.println(newByte);
+        char input[1] = { c };
+        char* inputDisplay = concatenate("Input Received:", input);
+        Serial.println(inputDisplay);
         return newByte;
     }
     return -1;
